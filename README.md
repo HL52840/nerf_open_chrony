@@ -1,10 +1,10 @@
-#nerf_open_chrony
+# nerf_open_chrony
 
 Couple of things you'll need to do before compile/upload.
   
-  -Install Adafruit-GFX (Graphics Driver)
-  -Install Adafruit-SSD1306 (LCD Driver)
+  - Install Adafruit-GFX (Graphics Driver)
+  - Install Adafruit-SSD1306 (LCD Driver)
   
-#Features added from master (So Far)
+# Features added from master (So Far)
 
-  -Reset by holding gate #1
+  - Reset by holding gate #1
