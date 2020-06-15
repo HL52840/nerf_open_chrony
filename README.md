@@ -12,6 +12,11 @@ Libraries that are required:
   
   - Adafruit-GFX (Graphics Driver)
   - Adafruit-SSD1306 (LCD Driver)
+
+#Error code explanation
+
+  -ERR1 = Couldn't Read
+  -ERR2 = Too Fast; Readable limit is 420 feet per second.
   
 # Features added (So Far)
 
