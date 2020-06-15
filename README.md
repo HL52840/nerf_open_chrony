@@ -13,6 +13,11 @@ Libraries that are required:
   - Adafruit-GFX (Graphics Driver)
   - Adafruit-SSD1306 (LCD Driver)
 
+# Settings
+
+  - serialdbgspeed = Set the serial
+  - bbgrams = Set the Nerf dart weight (or BB) weight in grams for joules calculation.
+
 # Error code explanation
 
   - ERR1 = Couldn't Read
