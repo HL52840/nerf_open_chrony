@@ -8,3 +8,4 @@ Couple of things you'll need to do before compile/upload.
 # Features added (So Far)
 
   - Reset by holding gate #1
+  - Readout in Joules
