@@ -6,7 +6,7 @@
 
 Software Required (On Local system)
 
-  -Arduino IDE
+  - Arduino IDE
 
 Libraries that are required:
   
