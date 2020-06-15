@@ -27,6 +27,7 @@ Libraries that are required:
 
   - Reset by holding gate #1
   - Readout in Joules
+  - Readout for average Joules
 
 # The DO NOT CHANGE Section in settings.
 
