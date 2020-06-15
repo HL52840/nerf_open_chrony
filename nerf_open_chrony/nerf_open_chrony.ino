@@ -1,3 +1,12 @@
+//Settings
+#define serialdbgspd 9600 //Change to set serial debug speed (usually 9600, but you can change this to whatever you want.)
+#define bbgrams 0.2 //Nerf Dart or BB weight in grams
+
+//DO NOT CHANGE ---------------------
+#define gate1pin 2 //Gate 1 input pin
+#define gate2pin 3 //Gate 2 input pin
+//-----------------------------------
+
 //Libraries Required
 #include <SPI.h>
 #include <Wire.h>
@@ -8,11 +17,11 @@
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
-#define OLED_RESET     4 // Reset pin # (or -1 if sharing Arduino reset pin)
+#define OLED_RESET 4 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
-float bbw = .2; //BB weight (Grams)
+float bbw = bbgrams; //BB weight (Grams)
 float joules = 0; //Joules
 float rof = 0; //Rate of fire
 long rof_t0 = 0;
@@ -35,8 +44,8 @@ bool g1_trip_latch = false;
 bool g2_trip_latch = false;
 int g1_persist = 0;
 int g2_persist = 0;
-int g1_pin = 2; //Sensor Pin 0
-int g2_pin = 3; //Sensor Pin 1
+int g1_pin = gate1pin; //Sensor Pin 0
+int g2_pin = gate2pin; //Sensor Pin 1
 int latch_persist = 2;
 float gate_dist = 51.0; //distance in millimeters
 float fps = 0; //Frames Per Second
@@ -133,7 +142,7 @@ void display_horz(){
 void setup() {
   pinMode(10,OUTPUT);
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(serialdbgspd);
   pinMode(2, INPUT);
   pinMode(3, INPUT);
   attachInterrupt(0,gate1,RISING);
