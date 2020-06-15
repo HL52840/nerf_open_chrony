@@ -1,40 +1,10 @@
-//Reset feature added
+//Libraries Required
 #include <SPI.h>
 #include <Wire.h>
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-float bbw = .2; //BB weight (Grams)
-float joules = 0;
-
-float rof = 0;
-long rof_t0 = 0;
-long rof_tprev = 0;
-int rof_count = 0;
-float avg_fps = 0;
-float shot_num = 0;
-int disp_rot = 0;
-long g1_time = 0;
-long g2_time = 0;
-long g1_slow_time = 0;
-long g2_slow_time = 0;
-long now = 0;
-long display_time = 0;
-bool g1_trip = false;
-bool g2_trip = false;
-bool g1_trip0 = false;
-bool  g2_trip0 = false;
-bool g1_trip_latch = false;
-bool g2_trip_latch = false;
-int g1_persist = 0;
-int g2_persist = 0;
-int g1_pin = 2;
-int g2_pin = 3; // This is our input pin
-int latch_persist = 2;
-float gate_dist = 51.0; //distance in millimeters
-float fps = 0;
-String fpstr = "";
-//oled screen dimensions.
+//OLED screen dimensions.
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
@@ -42,20 +12,54 @@ String fpstr = "";
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
 
+float bbw = .2; //BB weight (Grams)
+float joules = 0; //Joules
+float rof = 0; //Rate of fire
+long rof_t0 = 0;
+long rof_tprev = 0;
+int rof_count = 0;
+float avg_fps = 0; // Average Feet Per Second
+float shot_num = 0; //Shot Counter
+int disp_rot = 0; //Display Rotation (0 = Horizontal, 1 = Vertical)
+long g1_time = 0; //Gate 1 recorded time
+long g2_time = 0; //Gate 2 recorded time
+long g1_slow_time = 0;
+long g2_slow_time = 0;
+long now = 0;
+long display_time = 0;
+bool g1_trip = false; //Gate 1 current state
+bool g2_trip = false; //Gate 2 current state
+bool g1_trip0 = false;
+bool  g2_trip0 = false;
+bool g1_trip_latch = false;
+bool g2_trip_latch = false;
+int g1_persist = 0;
+int g2_persist = 0;
+int g1_pin = 2; //Sensor Pin 0
+int g2_pin = 3; //Sensor Pin 1
+int latch_persist = 2;
+float gate_dist = 51.0; //distance in millimeters
+float fps = 0; //Frames Per Second
+String fpstr = ""; //Frames per second in char form
+
+//Record Gate 1 time
 void gate1(){
   g1_time = micros();
   g1_trip_latch = true;
 }
 
+//Record Gate 2 time
 void gate2(){
   g2_time = micros();
   g2_trip_latch = true;
 }
 
+//Set timer to current micros()
 void timer(){
   now = micros();
 }
 
+//Display vertical
 void display_vert(){
   display.setRotation(1);
   display.clearDisplay();
@@ -91,6 +95,7 @@ void display_vert(){
   display.display();
 }
 
+//Display horizontal
 void display_horz(){
   display.setRotation(0);
   display.clearDisplay();
@@ -124,6 +129,7 @@ void display_horz(){
   display.display();
 }
 
+//Setup (Run once)
 void setup() {
   pinMode(10,OUTPUT);
   // put your setup code here, to run once:
@@ -150,6 +156,8 @@ void setup() {
     display_horz();
   }
 }
+
+//Run forever
 void loop() {
   timer();
   if((now-display_time) > 50000){
