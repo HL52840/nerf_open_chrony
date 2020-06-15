@@ -2,7 +2,7 @@
 
 (Placeholder)
 
-#Prequesites
+# Prequesites
 
 Software Required (On Local system)
 
