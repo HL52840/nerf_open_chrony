@@ -10,8 +10,8 @@ Software Required (On Local system)
 
 Libraries that are required:
   
-  - Adafruit-GFX (Graphics Driver)
-  - Adafruit-SSD1306 (LCD Driver)
+  - Adafruit_GFX (Graphics Driver)
+  - Adafruit_SSD1306 (LCD Driver)
 
 # Settings
 
