@@ -1,11 +1,14 @@
 //Settings
 #define serialdbgspd 9600 //Change to set serial debug speed (usually 9600, but you can change this to whatever you want.)
-#define bbgrams 0.2 //Nerf Dart or BB weight in grams
+#define bbgrams 0.2 //Nerf Dart or BB weight in grams for joules calculation.
 
-//DO NOT CHANGE ---------------------
+//DO NOT CHANGE ------------------------
 #define gate1pin 2 //Gate 1 input pin
 #define gate2pin 3 //Gate 2 input pin
-//-----------------------------------
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+#define OLED_RESET 4 // Reset pin (or -1 if sharing Arduino reset pin)
+//--------------------------------------
 
 //Libraries Required
 #include <SPI.h>
@@ -13,14 +16,10 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
-//OLED screen dimensions.
-#define SCREEN_WIDTH 128 // OLED display width, in pixels
-#define SCREEN_HEIGHT 64 // OLED display height, in pixels
 // Declaration for an SSD1306 display connected to I2C (SDA, SCL pins)
-#define OLED_RESET 4 // Reset pin # (or -1 if sharing Arduino reset pin)
 Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 
-
+//Variables
 float bbw = bbgrams; //BB weight (Grams)
 float joules = 0; //Joules
 float rof = 0; //Rate of fire
