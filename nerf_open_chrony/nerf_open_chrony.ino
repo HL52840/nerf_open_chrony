@@ -4,6 +4,9 @@
 #include <Adafruit_GFX.h>
 #include <Adafruit_SSD1306.h>
 
+float bbw = .2; //BB weight (Grams)
+float joules = 0;
+
 float rof = 0;
 long rof_t0 = 0;
 long rof_tprev = 0;
@@ -66,20 +69,23 @@ void display_vert(){
   display.setCursor(0,68);
   display.print("SHOT #:");
   display.print(int(shot_num));
-  display.setCursor(0,55);
+  display.setCursor(0,94);
   display.print("AVGFPS:");
   display.print(int(avg_fps));
   display.setCursor(0,81);
   display.print("RND/S:");
-  char buffer[5];
-  String srof = dtostrf(rof, 2, 1, buffer);
+  char buffer2[4];
+  String srof = dtostrf(rof, 2, 1, buffer2);
   display.print(srof);
+  display.setCursor(0,55);
+  display.print(joules);
+  display.print("J");
   if(g1_trip){
-    display.setCursor(15,105);
+    display.setCursor(15,109);
     display.print("GATE 1");
   }
   if(g2_trip){
-    display.setCursor(15,115);
+    display.setCursor(15,119);
     display.print("GATE 2");
   }
   display.display();
@@ -104,12 +110,15 @@ void display_horz(){
   char buffer[5];
   String srof = dtostrf(rof, 2, 1, buffer);
   display.print(srof);
+  display.setCursor(2,35);
+  display.print(joules);
+  display.print("J");
   if(g1_trip){
-    display.setCursor(2,40);
+    display.setCursor(2,46);
     display.print("GATE 1");
   }
   if(g2_trip){
-    display.setCursor(2,51);
+    display.setCursor(2,57);
     display.print("GATE 2");
   }
   display.display();
@@ -118,7 +127,7 @@ void display_horz(){
 void setup() {
   pinMode(10,OUTPUT);
   // put your setup code here, to run once:
-  Serial.begin(1000000);
+  Serial.begin(9600);
   pinMode(2, INPUT);
   pinMode(3, INPUT);
   attachInterrupt(0,gate1,RISING);
@@ -162,6 +171,8 @@ void loop() {
     if((g1_trip) && (!g1_trip0)){
       g1_slow_time = millis();
     }
+    
+    
     
    //---------------------------------------------
     if((!g2_trip) && (g2_trip0)){
@@ -241,7 +252,12 @@ void loop() {
           rof = float(rof_count)*1000000/float(g2_time-rof_t0);
         }
       }
-      
+//------------------------
+      //fps = 300; //Testing
+      joules = 0.0005*bbw*sq(fps*0.3048);
+      Serial.print("Joules: ");
+      Serial.println(joules);
+//------------------------
       Serial.println(fps);
       Serial.println(g2_time-g1_time);
       g1_persist = 0;
