@@ -22,6 +22,7 @@ Adafruit_SSD1306 display(SCREEN_WIDTH, SCREEN_HEIGHT, &Wire, OLED_RESET);
 //Variables
 float bbw = bbgrams; //BB weight (Grams)
 float joules = 0; //Joules
+float avgjoules = 0; //Average Joules
 float rof = 0; //Rate of fire
 long rof_t0 = 0;
 long rof_tprev = 0;
@@ -72,33 +73,44 @@ void display_vert(){
   display.setRotation(1);
   display.clearDisplay();
   display.setTextSize(2);
+  
   display.setCursor(12,10);
   display.print("FPS: ");
   display.setTextSize(2);
+  
   display.setCursor(12,30);
   display.print(fpstr);
   display.setTextSize(1);
-  display.setCursor(0,68);
+  
+  display.setCursor(0,94);
   display.print("SHOT #:");
   display.print(int(shot_num));
-  display.setCursor(0,94);
+  
+  display.setCursor(0,81);
   display.print("AVGFPS:");
   display.print(int(avg_fps));
-  display.setCursor(0,81);
+  
+  display.setCursor(0,107);
   display.print("RND/S:");
   char buffer2[4];
   String srof = dtostrf(rof, 2, 1, buffer2);
   display.print(srof);
+  
   display.setCursor(0,55);
   display.print(joules);
   display.print("J");
+
+  display.setCursor(0,68);
+  display.print(avgjoules);
+  display.print("Jx");
+  
   if(g1_trip){
-    display.setCursor(15,109);
-    display.print("GATE 1");
+    display.setCursor(0,119);
+    display.print("G1");
   }
   if(g2_trip){
     display.setCursor(15,119);
-    display.print("GATE 2");
+    display.print("G2");
   }
   display.display();
 }
@@ -126,13 +138,18 @@ void display_horz(){
   display.setCursor(2,35);
   display.print(joules);
   display.print("J");
+
+  display.setCursor(2,46);
+  display.print(avgjoules);
+  display.print("Jx");
+  
   if(g1_trip){
-    display.setCursor(2,46);
-    display.print("GATE 1");
+    display.setCursor(2,57);
+    display.print("G1");
   }
   if(g2_trip){
-    display.setCursor(2,57);
-    display.print("GATE 2");
+    display.setCursor(18,57);
+    display.print("G2");
   }
   display.display();
 }
@@ -273,6 +290,11 @@ void loop() {
       joules = 0.0005*bbw*sq(fps*0.3048);
       Serial.print("Joules: ");
       Serial.println(joules);
+//------------------------
+      avgjoules = 0.0005*bbw*sq(avg_fps*0.3048);
+      Serial.print("avgJoules: ");
+      Serial.println(avgjoules);
+
 //------------------------
       Serial.println(fps);
       Serial.println(g2_time-g1_time);
