@@ -15,8 +15,8 @@ Libraries that are required:
 
 #Error code explanation
 
-  -ERR1 = Couldn't Read
-  -ERR2 = Too Fast; Readable limit is 420 feet per second.
+  - ERR1 = Couldn't Read
+  - ERR2 = Too Fast; Readable limit is 420 feet per second.
   
 # Features added (So Far)
 
