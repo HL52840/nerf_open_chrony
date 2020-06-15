@@ -5,6 +5,7 @@
 //DO NOT CHANGE ------------------------------------------------------------------------------------
 #define gate1pin 2 //Gate 1 input pin
 #define gate2pin 3 //Gate 2 input pin
+#define gatedistance 51.0 //Distance from gate-to-gate
 #define SCREEN_WIDTH 128 // OLED display width, in pixels
 #define SCREEN_HEIGHT 64 // OLED display height, in pixels
 #define OLED_RESET 4 // Reset pin (or -1 if sharing Arduino reset pin)
@@ -30,7 +31,7 @@ long rof_tprev = 0;
 
 float avg_fps = 0; // Average Feet Per Second
 float shot_num = 0; //Shot 
-float gate_dist = 51.0; //distance in millimeters
+float gate_dist = gatedistance; //distance in millimeters
 float fps = 0; //Frames Per Second
 
 long g1_time = 0; //Gate 1 recorded time
