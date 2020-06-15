@@ -1,9 +1,17 @@
 # nerf_open_chrony
 
-Couple of things you'll need to do before compile/upload.
+(Placeholder)
+
+#Prequesites
+
+Software Required (On Local system)
+
+  -Arduino IDE
+
+Libraries that are required:
   
-  - Install Adafruit-GFX (Graphics Driver)
-  - Install Adafruit-SSD1306 (LCD Driver)
+  - Adafruit-GFX (Graphics Driver)
+  - Adafruit-SSD1306 (LCD Driver)
   
 # Features added (So Far)
 
