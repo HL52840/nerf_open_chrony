@@ -1,4 +1,4 @@
-# nerf_open_chrony
+# open_chrony
 
 (Placeholder)
 
