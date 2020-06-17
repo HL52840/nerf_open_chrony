@@ -15,7 +15,7 @@ Libraries that are required:
 
 # Settings
 
-  - serialdbgspeed = Set the serial
+  - serialdbgspeed = Set the serial debug speed
   - bbgrams = Set the Nerf dart weight (or BB) weight in grams for joules calculation.
 
 # Error code explanation
