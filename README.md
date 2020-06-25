@@ -28,6 +28,10 @@ Libraries that are required:
   - Reset by holding gate #1
   - Readout in Joules
   - Readout for average Joules
+  
+# To Do
+
+  - Use different splash screen instead of the Adafruit default splash screen.
 
 # The DO NOT CHANGE Section in settings.
 
